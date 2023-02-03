@@ -13,7 +13,7 @@ License: GPL-3
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.2.1
-Imports: readr, rpart.plot, quantreg, rpart.utils, gtools, dplyr,
+Imports: readr, rpart.plot, quantreg, gtools, dplyr,
         stringr, base, shiny, DT, pracma, mvpart, methods
 Suggests: knitr, rmarkdown
 VignetteBuilder: knitr
