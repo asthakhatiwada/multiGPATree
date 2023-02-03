@@ -16,7 +16,6 @@ RoxygenNote: 7.2.1
 Imports: readr, rpart.plot, quantreg, gtools, dplyr,
         stringr, base, shiny, DT, pracma, mvpart, methods
 Suggests: knitr, rmarkdown
-VignetteBuilder: knitr
 NeedsCompilation: no
 Packaged: 2023-02-02 22:13:05 UTC; khatiwadaa
 Author: Aastha Khatiwada [aut, cre] (<https://orcid.org/0000-0002-3565-451X>)
