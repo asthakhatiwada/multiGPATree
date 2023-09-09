@@ -9,18 +9,11 @@ To install the multiGPATree, use the following commands. Please ensure to downlo
 library(devtools)
 install_github("cran/mvpart")
 install_github("asthakhatiwada/multiGPATree")
-```
-
-# Usage
-The 'multiGPATree_vignette.pdf' provides a framework for the step-by-step post-GWAS analysis using the 'multiGPATree' package. Help file generated using the following code also provides a good starting point, including some example command lines, to use the 'multiGPATree' package:
-
-```{r}
 library(multiGPATree)
 package?multiGPATree
 ```
 
 # Demo
 Please review our [package vignette](https://asthakhatiwada.github.io/multiGPATree/vignettes/multiGPATree_vignette_html.html) for demonstration and overview of the functions included in the multiGPATree pakcage.
-
 
 
