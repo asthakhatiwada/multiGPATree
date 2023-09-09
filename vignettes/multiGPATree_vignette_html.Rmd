@@ -71,7 +71,9 @@ head(simdata$annMat)
 # Workflow {#workflow}
 ## Fitting the multiGPATree Model {#fitting}
 
-We are now ready to fit a *`multiGPATree`* model using the GWAS $p$-value  and functional annotation data described above. We can fit the *`multiGPATree`* model with the command below. Note that when there are 3 phenotypes, the total number of GWAS pair to be integrated is 3 (P1_P2, P1_P3 and P2_P3). The *`multiGPATree`* function can integrate GWAS association p-values for multiple trait pairs simultaneously, in parallel, using the *`ncore`* parameter within the *`multiGPATree`* function.
+We are now ready to fit multi-GPA-Tree models using the GWAS $p$-value (*simdata\$gwasPval*) and functional annotation data (*simdata\$annMat*) described above. We can fit the multi-GPA-Tree models using the command below. Note that when there are 3 traits to analyze, the total number of GWAS pairs to be integrated is 3 (P1_P2, P1_P3 and P2_P3). The *`multiGPATree()`* function can integrate GWAS association p-values for multiple trait pairs simultaneously (in parallel), using the *`ncore`* parameter within the *`multiGPATree()`* function. We recommend users to increase the input for the *`ncore`* parameter as the number of GWAS traits in the data increases.
+
+The object returned by the *`multiGPATree()`* function is of class *`multiGPATreeMethod`*. This object contains 3 elements: 1) *`fit`*, 2) *`gwasPval`* and 3) *`annMat`*. The object *`fit`* contains results pertaining to each GWAS pair that were analyzed, while *`gwasPval`* and *`annMat`* are the data matrices provided by the user.  Each object in *`fit`* (P1_P2, P1_P3 and P2_P3) are of class *`multiGPATree`* and are input parameters for the *`prune()`*, *`plot()`*, *`leaf()`*, and *`assoc()`* functions described below.
 
 ```{r, message=FALSE}
 fit.mGPATree <- multiGPATree(gwasPval = simdata$gwasPval,
@@ -81,53 +83,89 @@ fit.mGPATree <- multiGPATree(gwasPval = simdata$gwasPval,
                             ncore = 3)
 fit.mGPATree
 class(fit.mGPATree)
+#head(fit.mGPATree$gwasPval)
+#head(fit.mGPATree$annMat)
+names(fit.mGPATree@fit)
 
 ```
 
 
+## Prunning the object of class *`multiGPATree`* {#pruning}
 
-## Prunning the multiGPATree model {#pruning}
-
-The \texttt{prune()} function will prune the *`multiGPATree`* model using any cp value between 0 and 1 as shown below.
+The *`prune()`* function will prune the objects of class *`multiGPATree`* using any *`cp`* value between 0 and 1 as shown below. As the *`cp`* value increases, the size of the tree decreases. We recommend pruning large trees to get results that are easier to interpret.
 
 ```{r, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
-fit.mGPATree.pruned <- prune(fit.mGPATree@fit$P1_P2, cp = 0.20)
-fit.mGPATree.pruned
+fit.mGPATree.pruned.p1p2 <- prune(fit.mGPATree@fit$P1_P2, cp = 0.20)
+fit.mGPATree.pruned.p1p2
+# fit.mGPATree.pruned.p1p3 <- prune(fit.mGPATree@fit$P1_P3, cp = 0.20) #  PRUNING THE MULTIGPATREE MODEL RESULT FOR PHENOTYPES P1 AND P3
+# fit.mGPATree.pruned.p1p3
+# fit.mGPATree.pruned.p2p3 <- prune(fit.mGPATree@fit$P2_P3, cp = 0.20) #  PRUNING THE MULTIGPATREE MODEL RESULT FOR PHENOTYPES P2 AND P3
+# fit.mGPATree.pruned.p2p3
 ```
 
 ## Functional annotation tree {#annotation}
 
-The \texttt{plot()} and \texttt{leaf()} functions will plot the *`multiGPATree`* functional annotation tree and provide information about the leaves (terminal nodes) in the tree as shown below.
+The *`plot()`* function will plot the object of class *`multiGPATree`* and the *`leaf()`* function will provide information about the leaves (terminal nodes) in the tree for the object of class *`multiGPATree`* as shown below.
 
 ```{r, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
 plot(fit.mGPATree@fit$P1_P2)
+# plot(fit.mGPATree@fit$P1_P3) #  MULTIGPATREE MODEL PLOT FOR PHENOTYPES P1 AND P3
+# plot(fit.mGPATree@fit$P2_P3) #  MULTIGPATREE MODEL PLOT FOR PHENOTYPES P2 AND P3
 ```
 
 ```{r, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
 leaf(fit.mGPATree@fit$P1_P2)
+# leaf(fit.mGPATree@fit$P1_P3) #  LEAF RELATED INFORMATION FOR PHENOTYPES P1 AND P3
+# leaf(fit.mGPATree@fit$P2_P3) #  LEAF RELATED INFORMATION FOR PHENOTYPES P2 AND P3
 ```
 
 
 ## Association mapping {#association}
 
-For the fitted *`multiGPATree`* model, we can make inferences about SNPs using the \texttt{assoc()} function by: $(1)$ prioritizing risk-associated SNPs for one or more traits, and (2) identifying the leaves of the *`multiGPATree`* model in which one or more trait risk-associated SNPs are located. In this case, the \texttt{assoc()} function returns four columns. The first column contains binary values where 1 indicates that the SNP is marginally associated with the first trait (P1) and 0 indicates otherwise. Similarly, the second column contains binary values where 1 indicates that the SNP is marginally associated with the second trait (P2) and 0 indicates otherwise. The third column contains binary values where 1 indicates that the SNP is jointly associated with both traits (P1 and P2) and 0 indicates otherwise.Finally, the fourth column provides information regarding the leaf in which a SNP is located in the *`multiGPATree`* plot. The \texttt{assoc()} function allows both local (\texttt{fdrControl="local"}) and global FDR controls (\texttt{fdrControl="global"}) and users can set the threshold to be between 0 and 1 using the '\texttt{FDR}' argument. 
+For each object of class *`multiGPATree`*, i.e., for each GWAS pair that is analyzed, we can make inferences about SNPs associated with the specific traits using the *`assoc()`* function by: $(1)$ prioritizing risk-associated SNPs for one or more traits, and (2) identifying the leaves of the *`multiGPATree`* model in which one or more trait risk-associated SNPs are located. For the *`P1_P2`* object of class *`multiGPATree`*, the *`assoc()`* function returns four columns. The first column contains binary values where 1 indicates that the SNP is marginally associated with the first trait (P1) and 0 indicates otherwise. Similarly, the second column contains binary values where 1 indicates that the SNP is marginally associated with the second trait (P2) and 0 indicates otherwise. The third column contains binary values where 1 indicates that the SNP is jointly associated with both traits (P1 and P2) and 0 indicates otherwise.Finally, the fourth column provides information regarding the leaf in which a SNP is located in the *`multiGPATree`* plot. The *`assoc()`* function allows both local (*`fdrControl="local"`*) and global FDR controls (*`fdrControl="global"`*) and users can set the threshold to be between 0 and 1 using the *`FDR`* argument. 
 
-For the simulated data, *`multiGPATree`* model identified $4$ SNPs to be jointly associated with traits P1 and P2 at the nominal global FDR level of $0.01$, all of which are located in leaf 5 which can be interpreted as the 4 risk SNPs being simultaneously annotated for both annotations $A5$ and $A6$. Similarly, *`multiGPATree`* model identified $38$ SNPs to be marginally associated with trait P1 at the nominal global FDR level of $0.01$. Of the  $38$ SNPs, 27 SNPs are located in leaf 6 and are simultaneously annotated for annotations $A1$ and $A2$ and 11 SNPs are located in leaf 5 and are simultaneously annotated for $A5$ and $A6$.The following lines of code can be used to investigate association mapping and functional annotation tree for *`multiGPATree`* models.
+For the simulated data, *`multiGPATree`* model identified $9$ SNPs to be jointly associated with traits P1 and P2 at the nominal global FDR level of $0.01$, all of which are located in leaf 5 which can be interpreted as the 9 risk SNPs being simultaneously annotated for both annotations $A5$ and $A6$. Similarly, *`multiGPATree`* model identified $68$ SNPs to be marginally associated with trait P1 at the nominal global FDR level of $0.01$. Of the  $68$ SNPs, 50 SNPs are located in leaf 7 and are simultaneously annotated for $A1$ and $A2$ and 18 SNPs are located in leaf 5 and are simultaneously annotated for annotations $A5$ and $A6$. The following lines of code can be used to investigate association mapping and functional annotation tree for objects of class *`multiGPATree`*.
 
 ```{r, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
-assoc.mGPATree <- multiGPATree::assoc(fit.mGPATree@fit$P1_P2,
-                                      FDR = 0.01, 
-                                      fdrControl="global")
-head(assoc.mGPATree)
-table(assoc.mGPATree$P1_P2)
-table(assoc.mGPATree$P1_P2, assoc.mGPATree$leaf)
-table(assoc.mGPATree$P1)
-table(assoc.mGPATree$P1, assoc.mGPATree$leaf)
-table(assoc.mGPATree$P2)
-table(assoc.mGPATree$P2, assoc.mGPATree$leaf)
 
-table(assoc.mGPATree$P1, assoc.mGPATree$P2)
-table(assoc.mGPATree$P1, assoc.mGPATree$P2, assoc.mGPATree$P1_P2)
+# ASSOCIATION MAPPING FOR PHENTYPES P1 AND P2
+assoc.mGPATree.p1p2 <- assoc(fit.mGPATree@fit$P1_P2,
+                             FDR = 0.01,
+                             fdrControl="global")
+head(assoc.mGPATree.p1p2)
+table(assoc.mGPATree.p1p2$P1_P2)
+table(assoc.mGPATree.p1p2$P1_P2, assoc.mGPATree.p1p2$leaf)
+table(assoc.mGPATree.p1p2$P1)
+table(assoc.mGPATree.p1p2$P1, assoc.mGPATree.p1p2$leaf)
+table(assoc.mGPATree.p1p2$P2)
+table(assoc.mGPATree.p1p2$P2, assoc.mGPATree.p1p2$leaf)
+
+
+# # ASSOCIATION MAPPING FOR PHENOTYPES P1 AND P3
+# assoc.mGPATree.p1p3 <- assoc(fit.mGPATree@fit$P1_P3,
+#                              FDR = 0.01,
+#                              fdrControl="global")
+# head(assoc.mGPATree.p1p3)
+# table(assoc.mGPATree.p1p3$P1_P3)
+# table(assoc.mGPATree.p1p3$P1_P3, assoc.mGPATree.p1p3$leaf)
+# table(assoc.mGPATree.p1p3$P1)
+# table(assoc.mGPATree.p1p3$P1, assoc.mGPATree.p1p3$leaf)
+# table(assoc.mGPATree.p1p3$P3)
+# table(assoc.mGPATree.p1p3$P3, assoc.mGPATree.p1p3$leaf)
+# 
+# # ASSOCIATION MAPPING FOR PHENOTYPES P2 AND P3
+# assoc.mGPATree.p2p3 <- assoc(fit.mGPATree@fit$P2_P3,
+#                              FDR = 0.01,
+#                              fdrControl="global")
+# head(assoc.mGPATree.p2p3)
+# table(assoc.mGPATree.p2p3$P2_P3)
+# table(assoc.mGPATree.p2p3$P2_P3, assoc.mGPATree.p2p3$leaf)
+# table(assoc.mGPATree.p2p3$P2)
+# table(assoc.mGPATree.p2p3$P2, assoc.mGPATree.p2p3$leaf)
+# table(assoc.mGPATree.p2p3$P3)
+# table(assoc.mGPATree.p2p3$P3, assoc.mGPATree.p2p3$leaf)
+
+
 ```
 
 # References
