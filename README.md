@@ -20,6 +20,7 @@ package?multiGPATree
 ```
 
 # Demo
-Visit this site for a [demo](https://asthakhatiwada.github.io/multiGPATree/vignettes/multiGPATree_vignette_html.html).
+Please review our [package vignette](https://asthakhatiwada.github.io/multiGPATree/vignettes/multiGPATree_vignette_html.html) for demonstration and overview of the functions included in the multiGPATree pakcage.
+
 
 
