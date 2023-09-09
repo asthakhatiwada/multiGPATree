@@ -1,0 +1,130 @@
+---
+title: Statistical Approach for Pleiotropy Informed and Functional Annotation Tree
+  Guided Prioritization of GWAS Results with `*multiGPATree*' Package
+author:
+  - Aastha Khatiwada^[Department of Biostatistics and Bioinformatics, National Jewish Health, Denver, CO], Ayse Selen Yilmaz^[Department of Biomedical Informatics, The Ohio State University, Columbus, OH], Bethany J. Wolf^[Department of Public Health Sciences, Medical University of South Carolina, Charleston, SC], Maciej Pietrzak^[Department of Biomedical Informatics, The Ohio State University, Columbus, OH], Dongjun Chung^[Pelotonia Institute for Immuno-Oncology, The James Comprehensive Cancer Center, The Ohio State University, Columbus, OH]
+output:
+  html_document:
+    df_print: paged
+    number_sections: yes
+bibliography: references.bib
+link_citations: yes
+biblio-style: apalike
+suppress-bibliography: no
+fontsize: 10pt
+geometry: margin=2.75cm
+r_build_args: "--compact-vignettes=both"
+# vignette: "%\\VignetteIndexEntry{multiGPATree-vignette} %\\VignetteEngine{knitr::rmarkdown}
+#   %\\VignetteEncoding{UTF-8}\n"
+vignette: >
+  %\VignetteIndexEntry{[multiGPATree-vignette-html]}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}  
+Vignetterbuilder: knitr, rmarkdown
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  prompt = TRUE,
+  comment = ""
+)
+```
+
+# Overview {.tabset}
+
+This vignette provides an introduction to the *`multiGPATree`* package. R package *`multiGPATree`* implements the *`multiGPATree`* method, a novel statistical approach to prioritizing risk-associated SNPs and the combinations of functional annotations related to one or more trait risk-associated SNPs. The *`multiGPATree`* approach employs a hierarchical model to integrate GWAS summary statistics for multiple traits and functional annotation information within a unified framework by combining an iterative procedure (EM algorithm [@dempster1977maximum]) and a multivariate decision tree algorithm (MVPART [@de2002multivariate]).
+
+The package can be loaded with the command:
+\newline
+
+```{r, message=FALSE, warning=FALSE}
+# install.packages("devtools")
+# library(devtools)
+# devtools::install_github("cran/mvpart")
+# library(mvpart)
+# devtools::install_github("asthakhatiwada/multiGPATree")
+library(multiGPATree)
+```
+
+
+This vignette is organized as follows.
+Section [2](#datastructure) discusses the data structure required to implement the *`multiGPATree`* method and section [3](#workflow) describes the workflow to implement the *`multiGPATree`* method. Section [3.1](#fitting) discusses how to fit a *`multiGPATree`* model, section [3.2](#pruning) describes how to prune a large *`multiGPATree`* model, section [3.3](#annotation) describes the *`multiGPATree`* model plot and functional annotation tree, and finally, section [3.4](#association) explains command lines for association mapping and identification of combination of functional annotations for one or more traits using *`multiGPATree`*.
+
+Please feel free to contact Dongjun Chung at *chung.911@osc.edu* or Aastha Khatiwada at *khatiwadaa@njhealth.org* for any questions or suggestions regarding the *`multiGPATree`* package.
+
+# Data structure {#datastructure}
+
+In this vignette, we use the simulated data (*simdata*) provided in the package to fit the *`multiGPATree`* model for post-GWAS analysis. The simulated data includes information for three traits/phenotypes (P1, P2 and P3). In the simulated data, the number of SNPs and the number of functional annotations are set to $M=1000$ and $K=10$, respectively. The GWAS association  $p$-values for the SNPs are stored in *simdata\$gwasPval* and the binary functional annotation information for the SNPs are stored in *simdata\$annMat*, respectively. The number of rows in *simdata\$gwasPval* is assumed to be the same as the number of rows in  *simdata\$annMat* where the $i$-th ($i=1,...,M$) row of *gwasPval* and *annMat*  correspond to the same SNPs.
+
+```{r}
+data("simdata")
+class(simdata)
+names(simdata)
+dim(simdata$gwasPval)
+dim(simdata$annMat)
+head(simdata$gwasPval)
+head(simdata$annMat)
+```
+
+
+# Workflow {#workflow}
+## Fitting the multiGPATree Model {#fitting}
+
+We are now ready to fit a *`multiGPATree`* model using the GWAS $p$-value  and functional annotation data described above. We can fit the *`multiGPATree`* model with the command:
+
+```{r, message=FALSE}
+fit.mGPATree <- multiGPATree(gwasPval = simdata$gwasPval,
+                            annMat = simdata$annMat,
+                            initAlpha = 0.1,
+                            cpTry = 0.005)
+fit.mGPATree
+```
+
+
+
+## Prunning the multiGPATree model {#pruning}
+
+The \texttt{prune()} function will prune the *`multiGPATree`* model using any cp value between 0 and 1 as shown below.
+
+```{r, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+fit.mGPATree.pruned <- prune(fit.mGPATree@fit$P1_P2, cp = 0.20)
+fit.mGPATree.pruned
+```
+
+## Functional annotation tree {#annotation}
+
+The \texttt{plot()} and \texttt{leaf()} functions will plot the *`multiGPATree`* functional annotation tree and provide information about the leaves (terminal nodes) in the tree as shown below.
+
+```{r, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+plot(fit.mGPATree@fit$P1_P2)
+```
+
+```{r, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+leaf(fit.mGPATree@fit$P1_P2)
+```
+
+
+## Association mapping {#association}
+
+For the fitted *`multiGPATree`* model, we can make inferences about SNPs using the \texttt{assoc()} function by: $(1)$ prioritizing risk-associated SNPs for one or more traits, and (2) identifying the leaves of the *`multiGPATree`* model in which one or more trait risk-associated SNPs are located. In this case, the \texttt{assoc()} function returns four columns. The first column contains binary values where 1 indicates that the SNP is marginally associated with the first trait (P1) and 0 indicates otherwise. Similarly, the second column contains binary values where 1 indicates that the SNP is marginally associated with the second trait (P2) and 0 indicates otherwise. The third column contains binary values where 1 indicates that the SNP is jointly associated with both traits (P1 and P2) and 0 indicates otherwise.Finally, the fourth column provides information regarding the leaf in which a SNP is located in the *`multiGPATree`* plot. The \texttt{assoc()} function allows both local (\texttt{fdrControl="local"}) and global FDR controls (\texttt{fdrControl="global"}) and users can set the threshold to be between 0 and 1 using the '\texttt{FDR}' argument. 
+
+For the simulated data, *`multiGPATree`* model identified $4$ SNPs to be jointly associated with traits P1 and P2 at the nominal global FDR level of $0.01$, all of which are located in leaf 5 which can be interpreted as the 4 risk SNPs being simultaneously annotated for both annotations $A5$ and $A6$. Similarly, *`multiGPATree`* model identified $38$ SNPs to be marginally associated with trait P1 at the nominal global FDR level of $0.01$. Of the  $38$ SNPs, 27 SNPs are located in leaf 6 and are simultaneously annotated for annotations $A1$ and $A2$ and 11 SNPs are located in leaf 5 and are simultaneously annotated for $A5$ and $A6$.The following lines of code can be used to investigate association mapping and functional annotation tree for *`multiGPATree`* models.
+
+```{r, eval=TRUE, include=TRUE, message=FALSE, warning=FALSE}
+assoc.mGPATree <- multiGPATree::assoc(fit.mGPATree@fit$P1_P2,
+                                      FDR = 0.01, 
+                                      fdrControl="global")
+head(assoc.mGPATree)
+table(assoc.mGPATree$P1_P2)
+table(assoc.mGPATree$P1_P2, assoc.mGPATree$leaf)
+table(assoc.mGPATree$P1)
+table(assoc.mGPATree$P1, assoc.mGPATree$leaf)
+table(assoc.mGPATree$P2)
+table(assoc.mGPATree$P2, assoc.mGPATree$leaf)
+
+table(assoc.mGPATree$P1, assoc.mGPATree$P2)
+table(assoc.mGPATree$P1, assoc.mGPATree$P2, assoc.mGPATree$P1_P2)
+```
+
+# References

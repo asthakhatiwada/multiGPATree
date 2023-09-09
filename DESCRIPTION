@@ -1,0 +1,22 @@
+Package: multiGPATree
+Title: A package to implement the multiGPATree method
+Version: 0.0.0.9000
+Depends: R (>= 3.5.0)
+Authors@R: 
+    person(given = "Aastha",
+           family = "Khatiwada",
+           role = c("aut", "cre"),
+           email = "asthakhatiwada@gmail.com",
+           comment = c(ORCID = "https://orcid.org/0000-0002-3565-451X"))
+Description: This package implements the multiGPATree methodology for post GWAS analysis.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.2.3
+Imports: rpart.plot, dplyr, mvpart, methods, foreach, doParallel, utils
+Suggests: knitr, rmarkdown
+VignetteBuilder: knitr, rmarkdown
+NeedsCompilation: yes
+Packaged: 2023-09-07 23:48:32 UTC; khatiwadaa
+Author: Aastha Khatiwada [aut, cre] (<https://orcid.org/0000-0002-3565-451X>)
+Maintainer: Aastha Khatiwada <asthakhatiwada@gmail.com>
