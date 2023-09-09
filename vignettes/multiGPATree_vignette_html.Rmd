@@ -71,14 +71,17 @@ head(simdata$annMat)
 # Workflow {#workflow}
 ## Fitting the multiGPATree Model {#fitting}
 
-We are now ready to fit a *`multiGPATree`* model using the GWAS $p$-value  and functional annotation data described above. We can fit the *`multiGPATree`* model with the command:
+We are now ready to fit a *`multiGPATree`* model using the GWAS $p$-value  and functional annotation data described above. We can fit the *`multiGPATree`* model with the command below. Note that when there are 3 phenotypes, the total number of GWAS pair to be integrated is 3 (P1_P2, P1_P3 and P2_P3). The *`multiGPATree`* function can integrate GWAS association p-values for multiple trait pairs simultaneously, in parallel, using the *`ncore`* parameter within the *`multiGPATree`* function.
 
 ```{r, message=FALSE}
 fit.mGPATree <- multiGPATree(gwasPval = simdata$gwasPval,
                             annMat = simdata$annMat,
                             initAlpha = 0.1,
-                            cpTry = 0.005)
+                            cpTry = 0.005,
+                            ncore = 3)
 fit.mGPATree
+class(fit.mGPATree)
+
 ```
 
 

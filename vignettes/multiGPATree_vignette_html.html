@@ -1736,11 +1736,18 @@ multiGPATree Model</h2>
 <p>We are now ready to fit a <em><code>multiGPATree</code></em> model
 using the GWAS <span class="math inline">\(p\)</span>-value and
 functional annotation data described above. We can fit the
-<em><code>multiGPATree</code></em> model with the command:</p>
+<em><code>multiGPATree</code></em> model with the command below. Note
+that when there are 3 phenotypes, the total number of GWAS pair to be
+integrated is 3 (P1_P2, P1_P3 and P2_P3). The
+<em><code>multiGPATree</code></em> function can integrate GWAS
+association p-values for multiple trait pairs simultaneously, in
+parallel, using the <em><code>ncore</code></em> parameter within the
+<em><code>multiGPATree</code></em> function.</p>
 <pre class="r"><code>&gt; fit.mGPATree &lt;- multiGPATree(gwasPval = simdata$gwasPval,
 +                             annMat = simdata$annMat,
 +                             initAlpha = 0.1,
-+                             cpTry = 0.005)
++                             cpTry = 0.005,
++                             ncore = 3)
 &gt; fit.mGPATree
 Summary: multiGPATree model results (class: multiGPATree)
 --------------------------------------------------
@@ -1749,7 +1756,11 @@ Data summary:
     Number of Annotations: 10
     Number of SNPs: 1000
     Number of GWAS pairs: 3
---------------------------------------------------</code></pre>
+--------------------------------------------------
+&gt; class(fit.mGPATree)
+[1] &quot;multiGPATreeMethod&quot;
+attr(,&quot;package&quot;)
+[1] &quot;multiGPATree&quot;</code></pre>
 </div>
 <div id="pruning" class="section level2" number="3.2">
 <h2><span class="header-section-number">3.2</span> Prunning the
