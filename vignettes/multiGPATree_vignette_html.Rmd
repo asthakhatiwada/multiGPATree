@@ -31,6 +31,8 @@ knitr::opts_chunk$set(
 )
 ```
 
+Source: vignettes/multiGPATree_vignette_html.Rmd
+
 # Overview {.tabset}
 
 This vignette provides an introduction to the *`multiGPATree`* package. R package *`multiGPATree`* implements the *`multiGPATree`* method, a novel statistical approach to prioritizing risk-associated SNPs and the combinations of functional annotations related to one or more trait risk-associated SNPs. The *`multiGPATree`* approach employs a hierarchical model to integrate GWAS summary statistics for multiple traits and functional annotation information within a unified framework by combining an iterative procedure (EM algorithm [@dempster1977maximum]) and a multivariate decision tree algorithm (MVPART [@de2002multivariate]).

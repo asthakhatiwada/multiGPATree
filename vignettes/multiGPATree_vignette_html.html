@@ -1651,6 +1651,7 @@ Pietrzak<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a>, Dongju
 </div>
 
 
+<p>Source: vignettes/multiGPATree_vignette_html.Rmd</p>
 <div id="overview" class="section level1 tabset" number="1">
 <h1 class="tabset"><span class="header-section-number">1</span>
 Overview</h1>
@@ -1794,7 +1795,7 @@ Results summary: Functional annotation tree description for the selected GWAS pa
 --------------------------------------------------
     Alpha estimates: 0.4454, 0.4129
        local FDR P1 local FDR P2                    Note
-LEAF 1       0.8784       0.8867 No annotations selected
+LEAF 1       0.8783       0.8867 No annotations selected
 --------------------------------------------------
 &gt; # fit.mGPATree.pruned.p1p3 &lt;- prune(fit.mGPATree@fit$P1_P3, cp = 0.20) #  PRUNING THE MULTIGPATREE MODEL RESULT FOR PHENOTYPES P1 AND P3
 &gt; # fit.mGPATree.pruned.p1p3
@@ -1816,7 +1817,7 @@ leaves (terminal nodes) in the tree for the object of class
 <pre class="r"><code>&gt; leaf(fit.mGPATree@fit$P1_P2)</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["local FDR P1"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["local FDR P2"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["A1"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["A6"],"name":[4],"type":["chr"],"align":["left"]},{"label":["A4"],"name":[5],"type":["chr"],"align":["left"]},{"label":["A3"],"name":[6],"type":["chr"],"align":["left"]},{"label":["A5"],"name":[7],"type":["chr"],"align":["left"]},{"label":["A2"],"name":[8],"type":["chr"],"align":["left"]}],"data":[{"1":"0.990964","2":"0.9876","3":"0","4":"0","5":"0","6":"-","7":"-","8":"-","_rn_":"LEAF 1"},{"1":"0.993304","2":"0.9914","3":"0","4":"0","5":"1","6":"0","7":"-","8":"-","_rn_":"LEAF 2"},{"1":"0.822318","2":"0.0315","3":"0","4":"0","5":"1","6":"1","7":"-","8":"-","_rn_":"LEAF 3"},{"1":"0.887526","2":"0.8901","3":"0","4":"1","5":"-","6":"-","7":"0","8":"-","_rn_":"LEAF 4"},{"1":"0.114378","2":"0.1295","3":"0","4":"1","5":"-","6":"-","7":"1","8":"-","_rn_":"LEAF 5"},{"1":"0.869030","2":"0.9390","3":"1","4":"-","5":"-","6":"-","7":"-","8":"0","_rn_":"LEAF 6"},{"1":"0.007009","2":"0.9257","3":"1","4":"-","5":"-","6":"-","7":"-","8":"1","_rn_":"LEAF 7"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["local FDR P1"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["local FDR P2"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["A1"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["A6"],"name":[4],"type":["chr"],"align":["left"]},{"label":["A4"],"name":[5],"type":["chr"],"align":["left"]},{"label":["A3"],"name":[6],"type":["chr"],"align":["left"]},{"label":["A5"],"name":[7],"type":["chr"],"align":["left"]},{"label":["A2"],"name":[8],"type":["chr"],"align":["left"]}],"data":[{"1":"0.990942","2":"0.9876","3":"0","4":"0","5":"0","6":"-","7":"-","8":"-","_rn_":"LEAF 1"},{"1":"0.993270","2":"0.9914","3":"0","4":"0","5":"1","6":"0","7":"-","8":"-","_rn_":"LEAF 2"},{"1":"0.822318","2":"0.0315","3":"0","4":"0","5":"1","6":"1","7":"-","8":"-","_rn_":"LEAF 3"},{"1":"0.887526","2":"0.8901","3":"0","4":"1","5":"-","6":"-","7":"0","8":"-","_rn_":"LEAF 4"},{"1":"0.114378","2":"0.1295","3":"0","4":"1","5":"-","6":"-","7":"1","8":"-","_rn_":"LEAF 5"},{"1":"0.869030","2":"0.9390","3":"1","4":"-","5":"-","6":"-","7":"-","8":"0","_rn_":"LEAF 6"},{"1":"0.007009","2":"0.9257","3":"1","4":"-","5":"-","6":"-","7":"-","8":"1","_rn_":"LEAF 7"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <pre class="r"><code>&gt; # leaf(fit.mGPATree@fit$P1_P3) #  LEAF RELATED INFORMATION FOR PHENOTYPES P1 AND P3
