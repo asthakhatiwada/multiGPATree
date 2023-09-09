@@ -19,3 +19,7 @@ library(multiGPATree)
 package?multiGPATree
 ```
 
+# Demo
+Visit this site for a [demo](https://asthakhatiwada.github.io/multiGPATree/vignettes/multiGPATree_vignette_html.html).
+
+
