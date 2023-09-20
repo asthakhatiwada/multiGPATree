@@ -1,8 +1,8 @@
 ---
 title: Statistical Approach for Pleiotropy Informed and Functional Annotation Tree
   Guided Prioritization of GWAS Results with `*multiGPATree*' Package
-author:
-  - Aastha Khatiwada^[Department of Biostatistics and Bioinformatics, National Jewish Health, Denver, CO], Ayse Selen Yilmaz^[Department of Biomedical Informatics, The Ohio State University, Columbus, OH], Bethany J. Wolf^[Department of Public Health Sciences, Medical University of South Carolina, Charleston, SC], Maciej Pietrzak^[Department of Biomedical Informatics, The Ohio State University, Columbus, OH], Dongjun Chung^[Pelotonia Institute for Immuno-Oncology, The James Comprehensive Cancer Center, The Ohio State University, Columbus, OH]
+author: Aastha Khatiwada^1,#^, Ayse Selen Yilmaz^2^, Bethany J. Wolf^3^, Maciej Pietrzak^2^, Dongjun Chung^2,4^ <br><br> ^1^Department of Biostatistics and Bioinformatics, National Jewish Health, Denver, CO <br> ^2^Department of Biomedical Informatics, The Ohio State University, Columbus, OH <br> ^3^Department of Public Health Sciences, Medical University of South Carolina, Charleston, SC <br> ^4^Pelotonia Institute for Immuno-Oncology, The James Comprehensive Cancer Center, The Ohio State University, Columbus, OH <br> ^#^ package developer/maintainer; send bug reports to asthakhatiwada@gmail.com
+
 output:
   html_document:
     df_print: paged
