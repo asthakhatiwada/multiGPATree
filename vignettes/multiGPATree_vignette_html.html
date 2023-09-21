@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Aastha Khatiwada1,#, Ayse Selen Yilmaz2, Bethany J. Wolf3, Maciej Pietrzak2, Dongjun Chung2,4    1Department of Biostatistics and Bioinformatics, National Jewish Health, Denver, CO   2Department of Biomedical Informatics, The Ohio State University, Columbus, OH   3Department of Public Health Sciences, Medical University of South Carolina, Charleston, SC   4Pelotonia Institute for Immuno-Oncology, The James Comprehensive Cancer Center, The Ohio State University, Columbus, OH   # package developer/maintainer; send bug reports to asthakhatiwada@gmail.com" />
+<meta name="author" content="Aastha Khatiwada1,#, Ayse Selen Yilmaz2, Bethany J. Wolf3, Maciej Pietrzak2, Dongjun Chung2,4  1Department of Biostatistics and Bioinformatics, National Jewish Health, Denver, CO   2Department of Biomedical Informatics, The Ohio State University, Columbus, OH   3Department of Public Health Sciences, Medical University of South Carolina, Charleston, SC   4Pelotonia Institute for Immuno-Oncology, The James Comprehensive Cancer Center, The Ohio State University, Columbus, OH   #Package developer/maintainer, send bug report to asthakhatiwada@gmail.com " />
 
 
 <title>Statistical Approach for Pleiotropy Informed and Functional Annotation Tree Guided Prioritization of GWAS Results with `multiGPATree’ Package</title>
@@ -1647,15 +1647,17 @@ Informed and Functional Annotation Tree Guided Prioritization of GWAS
 Results with `<em>multiGPATree</em>’ Package</h1>
 <h4 class="author">Aastha Khatiwada<sup>1,#</sup>, Ayse Selen
 Yilmaz<sup>2</sup>, Bethany J. Wolf<sup>3</sup>, Maciej
-Pietrzak<sup>2</sup>, Dongjun Chung<sup>2,4</sup> <br><br>
+Pietrzak<sup>2</sup>, Dongjun Chung<sup>2,4</sup><br />
+<h6><br />
 <sup>1</sup>Department of Biostatistics and Bioinformatics, National
 Jewish Health, Denver, CO <br> <sup>2</sup>Department of Biomedical
 Informatics, The Ohio State University, Columbus, OH <br>
 <sup>3</sup>Department of Public Health Sciences, Medical University of
 South Carolina, Charleston, SC <br> <sup>4</sup>Pelotonia Institute for
 Immuno-Oncology, The James Comprehensive Cancer Center, The Ohio State
-University, Columbus, OH <br> <sup>#</sup> package developer/maintainer;
-send bug reports to <a href="mailto:asthakhatiwada@gmail.com" class="email">asthakhatiwada@gmail.com</a></h4>
+University, Columbus, OH <br> <sup>#</sup>Package developer/maintainer,
+send bug report to <a href="mailto:asthakhatiwada@gmail.com" class="email">asthakhatiwada@gmail.com</a><br />
+<h6></h4>
 
 </div>
 
@@ -1693,10 +1695,9 @@ tree, and finally, section <a href="#association">3.4</a> explains
 command lines for association mapping and identification of combination
 of functional annotations for one or more traits using
 <em><code>multiGPATree</code></em>.</p>
-<p>Please feel free to contact Dongjun Chung at <em><a href="mailto:chung.911@osc.edu" class="email">chung.911@osc.edu</a></em>
-or Aastha Khatiwada at <em><a href="mailto:khatiwadaa@njhealth.org" class="email">khatiwadaa@njhealth.org</a></em> for any questions or
-suggestions regarding the <em><code>multiGPATree</code></em>
-package.</p>
+<p>Please feel free to contact Aastha Khatiwada at <em><a href="mailto:asthakhatiwada@gmail.com" class="email">asthakhatiwada@gmail.com</a></em> to report bug or for any
+questions or suggestions regarding the
+<em><code>multiGPATree</code></em> package.</p>
 </div>
 <div id="datastructure" class="section level1" number="2">
 <h1><span class="header-section-number">2</span> Data structure</h1>
@@ -1804,7 +1805,7 @@ Results summary: Functional annotation tree description for the selected GWAS pa
 --------------------------------------------------
     Alpha estimates: 0.4454, 0.4129
        local FDR P1 local FDR P2                    Note
-LEAF 1       0.8783       0.8867 No annotations selected
+LEAF 1       0.8784       0.8867 No annotations selected
 --------------------------------------------------
 &gt; # fit.mGPATree.pruned.p1p3 &lt;- prune(fit.mGPATree@fit$P1_P3, cp = 0.20) #  PRUNING THE MULTIGPATREE MODEL RESULT FOR PHENOTYPES P1 AND P3
 &gt; # fit.mGPATree.pruned.p1p3
@@ -1826,7 +1827,7 @@ leaves (terminal nodes) in the tree for the object of class
 <pre class="r"><code>&gt; leaf(fit.mGPATree@fit$P1_P2)</code></pre>
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
-{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["local FDR P1"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["local FDR P2"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["A1"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["A6"],"name":[4],"type":["chr"],"align":["left"]},{"label":["A4"],"name":[5],"type":["chr"],"align":["left"]},{"label":["A3"],"name":[6],"type":["chr"],"align":["left"]},{"label":["A5"],"name":[7],"type":["chr"],"align":["left"]},{"label":["A2"],"name":[8],"type":["chr"],"align":["left"]}],"data":[{"1":"0.990942","2":"0.9876","3":"0","4":"0","5":"0","6":"-","7":"-","8":"-","_rn_":"LEAF 1"},{"1":"0.993270","2":"0.9914","3":"0","4":"0","5":"1","6":"0","7":"-","8":"-","_rn_":"LEAF 2"},{"1":"0.822318","2":"0.0315","3":"0","4":"0","5":"1","6":"1","7":"-","8":"-","_rn_":"LEAF 3"},{"1":"0.887526","2":"0.8901","3":"0","4":"1","5":"-","6":"-","7":"0","8":"-","_rn_":"LEAF 4"},{"1":"0.114378","2":"0.1295","3":"0","4":"1","5":"-","6":"-","7":"1","8":"-","_rn_":"LEAF 5"},{"1":"0.869030","2":"0.9390","3":"1","4":"-","5":"-","6":"-","7":"-","8":"0","_rn_":"LEAF 6"},{"1":"0.007009","2":"0.9257","3":"1","4":"-","5":"-","6":"-","7":"-","8":"1","_rn_":"LEAF 7"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["local FDR P1"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["local FDR P2"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["A1"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["A6"],"name":[4],"type":["chr"],"align":["left"]},{"label":["A4"],"name":[5],"type":["chr"],"align":["left"]},{"label":["A3"],"name":[6],"type":["chr"],"align":["left"]},{"label":["A5"],"name":[7],"type":["chr"],"align":["left"]},{"label":["A2"],"name":[8],"type":["chr"],"align":["left"]}],"data":[{"1":"0.990964","2":"0.9876","3":"0","4":"0","5":"0","6":"-","7":"-","8":"-","_rn_":"LEAF 1"},{"1":"0.993304","2":"0.9914","3":"0","4":"0","5":"1","6":"0","7":"-","8":"-","_rn_":"LEAF 2"},{"1":"0.822318","2":"0.0315","3":"0","4":"0","5":"1","6":"1","7":"-","8":"-","_rn_":"LEAF 3"},{"1":"0.887526","2":"0.8901","3":"0","4":"1","5":"-","6":"-","7":"0","8":"-","_rn_":"LEAF 4"},{"1":"0.114378","2":"0.1295","3":"0","4":"1","5":"-","6":"-","7":"1","8":"-","_rn_":"LEAF 5"},{"1":"0.869030","2":"0.9390","3":"1","4":"-","5":"-","6":"-","7":"-","8":"0","_rn_":"LEAF 6"},{"1":"0.007009","2":"0.9257","3":"1","4":"-","5":"-","6":"-","7":"-","8":"1","_rn_":"LEAF 7"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
   </script>
 </div>
 <pre class="r"><code>&gt; # leaf(fit.mGPATree@fit$P1_P3) #  LEAF RELATED INFORMATION FOR PHENOTYPES P1 AND P3

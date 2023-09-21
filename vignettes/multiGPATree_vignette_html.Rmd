@@ -1,8 +1,7 @@
 ---
 title: Statistical Approach for Pleiotropy Informed and Functional Annotation Tree
   Guided Prioritization of GWAS Results with `*multiGPATree*' Package
-author: Aastha Khatiwada^1,#^, Ayse Selen Yilmaz^2^, Bethany J. Wolf^3^, Maciej Pietrzak^2^, Dongjun Chung^2,4^ <br><br> ^1^Department of Biostatistics and Bioinformatics, National Jewish Health, Denver, CO <br> ^2^Department of Biomedical Informatics, The Ohio State University, Columbus, OH <br> ^3^Department of Public Health Sciences, Medical University of South Carolina, Charleston, SC <br> ^4^Pelotonia Institute for Immuno-Oncology, The James Comprehensive Cancer Center, The Ohio State University, Columbus, OH <br> ^#^ package developer/maintainer; send bug reports to asthakhatiwada@gmail.com
-
+author: Aastha Khatiwada^1,#^, Ayse Selen Yilmaz^2^, Bethany J. Wolf^3^, Maciej Pietrzak^2^, Dongjun Chung^2,4^ <h6>^1^Department of Biostatistics and Bioinformatics, National Jewish Health, Denver, CO <br> ^2^Department of Biomedical Informatics, The Ohio State University, Columbus, OH <br> ^3^Department of Public Health Sciences, Medical University of South Carolina, Charleston, SC <br> ^4^Pelotonia Institute for Immuno-Oncology, The James Comprehensive Cancer Center, The Ohio State University, Columbus, OH <br> ^#^Package developer/maintainer, send bug report to asthakhatiwada@gmail.com<h6>
 output:
   html_document:
     df_print: paged
@@ -53,7 +52,7 @@ library(multiGPATree)
 This vignette is organized as follows.
 Section [2](#datastructure) discusses the data structure required to implement the *`multiGPATree`* method and section [3](#workflow) describes the workflow to implement the *`multiGPATree`* method. Section [3.1](#fitting) discusses how to fit a *`multiGPATree`* model, section [3.2](#pruning) describes how to prune a large *`multiGPATree`* model, section [3.3](#annotation) describes the *`multiGPATree`* model plot and functional annotation tree, and finally, section [3.4](#association) explains command lines for association mapping and identification of combination of functional annotations for one or more traits using *`multiGPATree`*.
 
-Please feel free to contact Dongjun Chung at *chung.911@osc.edu* or Aastha Khatiwada at *khatiwadaa@njhealth.org* for any questions or suggestions regarding the *`multiGPATree`* package.
+Please feel free to contact Aastha Khatiwada at *asthakhatiwada@gmail.com* to report bug or for any questions or suggestions regarding the *`multiGPATree`* package.
 
 # Data structure {#datastructure}
 
